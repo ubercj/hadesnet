@@ -1,24 +1,3 @@
-# README
+The final project in the Rails module of The Odin Project. More info about this project here: https://www.theodinproject.com/paths/full-stack-ruby-on-rails/courses/ruby-on-rails/lessons/final-project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The assignment is to essentially recreate Facebook: users can post, comment, and send friend requests to other users. In order to get past the login page, a user must sign in or create an account. I use the Devise gem to handle the user authentication. It's also required to allow a user to sign up/log in with their actual Facebook account using OAuth.

@@ -1,0 +1,11 @@
+<% @posts.each do |post| %>
+  <div>
+    <%= post.user.name %>
+  </div>
+  <div>
+    <%= post.body %>
+  </div>
+  <% if post.user == current_user %>
+    <%= link_to "Edit Post", edit_post_path(post) %>
+  <% end %>
+<% end %>
