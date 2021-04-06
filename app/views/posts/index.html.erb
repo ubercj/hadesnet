@@ -5,7 +5,23 @@
   <div>
     <%= post.body %>
   </div>
+    <%= link_to "Add Comment", new_post_comment_path(post) %>
+  <div>
+    <% post.comments.each do |comment| %>
+      <div>
+        <p><%= comment.user.name %> says:</p>
+      </div>
+      <div>
+        <%= comment.body %>
+      </div>
+      <% if comment.user == current_user%>
+        <%= link_to "Edit", edit_post_comment_path(post, comment) %>
+        <%= link_to "Delete", post_comment_path(post, comment), method: :delete, data: { confirm: "Are you sure you want to delete this comment?" } %>
+      <% end %>
+    <% end %>
+  </div>
   <% if post.user == current_user %>
     <%= link_to "Edit Post", edit_post_path(post) %>
+    <%= link_to "Delete Post", post_path(post), method: :delete, data: { confirm: "Are you sure you want to delete this post?" } %>
   <% end %>
 <% end %>
