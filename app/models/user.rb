@@ -10,4 +10,5 @@ class User < ApplicationRecord
   has_many :sent_requests, class_name: "FriendRequest", foreign_key: :sender_id
   has_many :posts
   has_many :comments
+  has_many :likes
 end
