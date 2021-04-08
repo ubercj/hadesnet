@@ -1,8 +1,0 @@
-<% @suggested_friends.each do |suggestion| %>
-  <div>
-    <% unless has_request?(current_user, suggestion) %>
-      <%= suggestion.name %>
-      <%= link_to "Send Friend Request", friendships_path(:friendship => { friend_id: suggestion.id }), method: :create %>
-    <% end %>
-  </div>
-<% end %>

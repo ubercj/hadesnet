@@ -1,0 +1,10 @@
+<h1>Find Friends</h1>
+
+<% @users.each do |suggestion| %>
+  <div>
+    <% unless has_request?(current_user, suggestion) || suggestion == current_user %>
+      <%= suggestion.name %>
+      <%= link_to "Send Friend Request", user_friendships_path(current_user, :friendship => { friend_id: suggestion.id }), method: :create %>
+    <% end %>
+  </div>
+<% end %>
