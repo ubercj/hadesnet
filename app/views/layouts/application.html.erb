@@ -21,8 +21,12 @@
         <%= link_to "Account Settings", edit_user_registration_path, class: "button is-medium is-link" %>
         <%= link_to current_user.name, user_path(current_user), class: "button is-medium is-link" %>
         <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "button is-medium is-link" %>
-        <%= link_to "Friend Requests", user_friendships_path(current_user), class: "button is-medium is-link" %>
         <%= link_to "Find Friends", users_path, class: "button is-medium is-info" %>
+        <% if current_user.received_requests.pending.any? %>
+          <%= link_to "Friend Requests", user_friendships_path(current_user), class: "button is-medium is-danger" %>
+        <% else %>
+          <%= link_to "Friend Requests", user_friendships_path(current_user), class: "button is-medium is-link" %>
+        <% end %>
       <% end %>
     </nav>
     

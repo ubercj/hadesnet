@@ -1,11 +1,17 @@
 <h1>Friends</h1>
 
-<% Friendship.with_user(@user).is_accepted.each do |friendship| %>
+<!-- <% Friendship.with_user(@user).is_accepted.each do |friendship| %>
   <div>
     <% if friendship.sender == current_user %>
       <%= friendship.receiver.name %>
     <% else %>
       <%= friendship.sender.name %>
     <% end %>
+  </div>
+<% end %> -->
+
+<% @user.friends.each do |friend| %>
+  <div>
+    <%= friend.name %>
   </div>
 <% end %>

@@ -15,4 +15,30 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments
   has_many :likes
+
+  def friends
+    friend_ids = sent_accepteds + received_accepteds
+    friends = friend_ids.map do |id|
+      User.find(id)
+    end
+    friends
+  end
+
+  private
+
+  def sent_accepteds
+    output = []
+    self.sent_requests.is_accepted.each do |friendship|
+      output << friendship.receiver_id
+    end
+    output
+  end
+
+  def received_accepteds
+    output = []
+    self.received_requests.is_accepted.each do |friendship|
+      output << friendship.sender_id
+    end
+    output
+  end
 end

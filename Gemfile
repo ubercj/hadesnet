@@ -34,9 +34,14 @@ gem 'devise', '~> 4.7', '>= 4.7.3'
 # Simple Forms
 gem 'simple_form', '~> 5.1'
 
-#Bulma
+# Bulma
 gem 'bulma-rails', '~> 0.9.1'
 
+# Facebook OmniAuth
+gem 'omniauth-facebook', '~> 8.0'
+
+# Figaro
+gem 'figaro', '~> 1.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

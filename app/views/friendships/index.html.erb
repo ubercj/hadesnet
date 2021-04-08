@@ -1,7 +1,11 @@
 <h1>Friend Requests</h1>
 
 <% @pending_requests.each do |request| %>
-  <p><%= request.sender.name %> would like to be your friend.</p>
-  <%= link_to "Accept", user_friendship_path(current_user, request), method: :patch %>
-  <%= link_to "Decline", user_friendship_path(current_user, request), method: :delete %>
+  <% if request.sender == current_user %>
+    <p>Your friend request to <%= request.receiver.name %> is pending.</p>
+  <% else %>
+    <p><%= request.sender.name %> would like to be your friend.</p>
+    <%= link_to "Accept", user_friendship_path(current_user, request), method: :patch %>
+    <%= link_to "Decline", user_friendship_path(current_user, request), method: :delete %>
+  <% end %>
 <% end %>

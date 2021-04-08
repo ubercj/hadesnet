@@ -1,33 +1,35 @@
 <% @posts.each do |post| %>
-  <div>
-    <%= post.user.name %>
-  </div>
-  <div>
-    <%= post.body %>
-    <p>Likes: <%= post.likes.count %></p>
-    <% if post.user == current_user %>
-      <%= link_to "Edit Post", edit_post_path(post) %>
-      <%= link_to "Delete Post", post_path(post), method: :delete, data: { confirm: "Are you sure you want to delete this post?" } %>
-    <% end %>
-  </div>
-    <%= link_to "Comment", new_post_comment_path(post) %>
-    <% if post.likes.any? { |like| like.user_id == current_user.id } %>
-      <%= link_to "Unlike", post_like_path(post, post.likes.find_by_user_id(current_user.id)), method: :delete %>
-    <% else %>
-      <%= link_to "Like", post_likes_path(post), method: :create %>
-    <% end %>
-  <div>
-    <% post.comments.each do |comment| %>
-      <div>
-        <p><%= comment.user.name %> says:</p>
-      </div>
-      <div>
-        <%= comment.body %>
-      </div>
-      <% if comment.user == current_user %>
-        <%= link_to "Edit", edit_post_comment_path(post, comment) %>
-        <%= link_to "Delete", post_comment_path(post, comment), method: :delete, data: { confirm: "Are you sure you want to delete this comment?" } %>
+  <% if current_user.friends.include?(post.user) || post.user == current_user %>
+    <div>
+      <%= post.user.name %>
+    </div>
+    <div>
+      <%= post.body %>
+      <p>Likes: <%= post.likes.count %></p>
+      <% if post.user == current_user %>
+        <%= link_to "Edit Post", edit_post_path(post) %>
+        <%= link_to "Delete Post", post_path(post), method: :delete, data: { confirm: "Are you sure you want to delete this post?" } %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+      <%= link_to "Comment", new_post_comment_path(post) %>
+      <% if post.likes.any? { |like| like.user_id == current_user.id } %>
+        <%= link_to "Unlike", post_like_path(post, post.likes.find_by_user_id(current_user.id)), method: :delete %>
+      <% else %>
+        <%= link_to "Like", post_likes_path(post), method: :create %>
+      <% end %>
+    <div>
+      <% post.comments.each do |comment| %>
+        <div>
+          <p><%= comment.user.name %> says:</p>
+        </div>
+        <div>
+          <%= comment.body %>
+        </div>
+        <% if comment.user == current_user %>
+          <%= link_to "Edit", edit_post_comment_path(post, comment) %>
+          <%= link_to "Delete", post_comment_path(post, comment), method: :delete, data: { confirm: "Are you sure you want to delete this comment?" } %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
