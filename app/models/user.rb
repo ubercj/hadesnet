@@ -6,8 +6,12 @@ class User < ApplicationRecord
 
   validates :name, presence: true
 
-  has_many :accepted_requests, class_name: "FriendRequest", foreign_key: :receiver_id
-  has_many :sent_requests, class_name: "FriendRequest", foreign_key: :sender_id
+  has_many :received_requests, class_name: "Friendship", foreign_key: :receiver_id
+  has_many :sent_requests, class_name: "Friendship", foreign_key: :sender_id
+
+  # has_many :friends, through: :received_requests, source: :sender
+  # has_many :friends, through: :sent_requests, source: :receiver
+
   has_many :posts
   has_many :comments
   has_many :likes

@@ -11,19 +11,19 @@
   </head>
 
   <body>
+    <p class="success"><%= success %></p>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
     <nav>
       <%= link_to "Fakebook", root_path, class: "button is-large is-link" %>
       <%= link_to "New Post", new_post_path, class: "button is-medium is-link" %>
       <% if user_signed_in? %>
         <%= link_to current_user.name, edit_user_registration_path, class: "button is-medium is-link" %>
         <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "button is-medium is-link" %>
-
-
+        <%= link_to "Friend Requests", friendships_path, class: "button is-medium is-link" %>
       <% end %>
     </nav>
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     
     <%= yield %>
   </body>

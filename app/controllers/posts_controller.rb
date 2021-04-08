@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.includes(:user, :comments)
+    @suggested_friends = User.all.limit(5)
   end
 
   def new
