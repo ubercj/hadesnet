@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Fakebook</title>
+    <title>HadesNet</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -15,7 +15,7 @@
     <p class="alert"><%= alert %></p>
 
     <nav>
-      <%= link_to "Fakebook", root_path, class: "button is-large is-link" %>
+      <%= link_to "HadesNet", root_path, class: "button is-large is-link" %>
       <%= link_to "New Post", new_post_path, class: "button is-medium is-link" %>
       <% if user_signed_in? %>
         <%= link_to "Account Settings", edit_user_registration_path, class: "button is-medium is-link" %>

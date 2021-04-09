@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 # Devise
-gem 'devise', '~> 4.7', '>= 4.7.3'
+gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 
 # Simple Forms
 gem 'simple_form', '~> 5.1'
@@ -39,6 +39,7 @@ gem 'bulma-rails', '~> 0.9.1'
 
 # Facebook OmniAuth
 gem 'omniauth-facebook', '~> 8.0'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
 # Figaro
 gem 'figaro', '~> 1.2'
