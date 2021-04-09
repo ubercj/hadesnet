@@ -3,7 +3,8 @@
 <% @users.each do |suggestion| %>
   <div>
     <% unless has_request?(current_user, suggestion) || suggestion == current_user %>
-      <%= suggestion.name %>
+      <%= image_tag user_profile_pic(suggestion) %>
+      <p><%= suggestion.name %></p>
       <%= link_to "Send Friend Request", user_friendships_path(current_user, :friendship => { friend_id: suggestion.id }), method: :create %>
     <% end %>
   </div>

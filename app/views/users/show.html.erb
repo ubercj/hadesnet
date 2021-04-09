@@ -1,5 +1,6 @@
 <h1><%= @user.name %>'s Profile</h1>
 
 <p>A photo will go here eventually.</p>
+<%= image_tag user_profile_pic(@user, 400) %>
 
 <%= render "friendships/friends", user: @user %>

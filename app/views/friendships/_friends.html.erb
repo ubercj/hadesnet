@@ -12,6 +12,7 @@
 
 <% @user.friends.each do |friend| %>
   <div>
+    <%= image_tag user_profile_pic(friend) %>
     <%= friend.name %>
   </div>
 <% end %>

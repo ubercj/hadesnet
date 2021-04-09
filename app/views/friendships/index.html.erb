@@ -1,6 +1,7 @@
 <h1>Friend Requests</h1>
 
 <% @pending_requests.each do |request| %>
+  <%= image_tag user_profile_pic(request.sender) %>
   <% if request.sender == current_user %>
     <p>Your friend request to <%= request.receiver.name %> is pending.</p>
   <% else %>
