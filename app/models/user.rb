@@ -30,6 +30,15 @@ class User < ApplicationRecord
     end
   end
 
+  def confirm!
+    welcome_email
+    super
+  end
+
+  def after_confirmation
+    welcome_email
+  end
+
   def friends
     friend_ids = sent_accepteds + received_accepteds
     friends = friend_ids.map do |id|
@@ -39,6 +48,10 @@ class User < ApplicationRecord
   end
 
   private
+
+  def welcome_email
+    UserMailer.with()
+  end
 
   def sent_accepteds
     output = []
