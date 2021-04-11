@@ -1,4 +1,29 @@
-<%= simple_form_for @post do |f| %>
-  <%= f.input :body, placeholder: "Type your post here." %>
-  <%= f.button :submit %>
-<% end %>
+<div class="container">
+  <div class="columns is-centered">
+    <div class="column is-half">
+      <%= simple_form_for @post do |f| %>
+        <div class="field">
+          <div class="control">
+            <%= f.input :body, label: false, wrapper: false, input_html: { class: "textarea" }, label_html: { class: "label" }, autofocus: true %>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label has-text-white-ter">Add a photo</label>
+          <div class="control">
+            <%= f.file_field :photo %>
+          </div>
+          <div class="control">
+            <%= f.hint "For best results, choose a photo with square dimensions." %>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <%= f.button :submit, class: "button is-medium is-danger" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

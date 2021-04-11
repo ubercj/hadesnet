@@ -1,20 +1,53 @@
-<h2>Log in</h2>
+<section class="section has-background-grey-dark">
+  <div class="columns has-background-grey-dark">
+    <div class="column">
+        <p class="title is-1 is-spaced has-text-white-ter has-text-centered">HadesNet</p>
+        <p class="subtitle is-3 has-text-danger has-text-centered">Welcome to <i>HELL</i></p>
+        <div class="block is-flex is-justify-content-center">
+          <%= image_tag "burning.png", size: "300" %>
+        </div>
+        <p class="has-text-grey-light has-text-centered is-size-7">Icon: "Burning" by kareemovic2000 from the Noun Project</p>
+    </div>
+  
+    <div class="column">
+      <div class="box has-background-danger has-text-grey-darker">
+        <div class="block">
+          <h2 class="title has-text-centered has-text-grey-darker">Log In</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+          <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="field">
+              <div class="control">
+                <%= f.input :email,
+                            required: false,
+                            autofocus: true,
+                            input_html: { autocomplete: "email", class: "input" },
+                            wrapper: false %>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <%= f.input :password,
+                            required: false,
+                            input_html: { autocomplete: "current-password", class: "input" },
+                            wrapper: false %>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <%= f.input :remember_me, as: :boolean, wrapper: false if devise_mapping.rememberable? %>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control">
+                <%= f.button :submit, "Log in", class: "button is-medium is-black" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <%= render "devise/shared/links" %>
+
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</section>

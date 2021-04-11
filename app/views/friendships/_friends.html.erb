@@ -1,4 +1,4 @@
-<h1>Friends</h1>
+<h1 class="title is-4 has-text-white-ter">Friends</h1>
 
 <!-- <% Friendship.with_user(@user).is_accepted.each do |friendship| %>
   <div>
@@ -11,8 +11,14 @@
 <% end %> -->
 
 <% @user.friends.each do |friend| %>
-  <div>
-    <%= image_tag user_profile_pic(friend) %>
-    <%= friend.name %>
+  <div class="block">
+    <div class="block">
+      <p class="image is-64x64">
+        <%= image_tag user_profile_pic(friend), class: "is-rounded" %>
+      </p>
+    </div>
+    <div class="block">
+      <strong class="has-text-white-ter"><%= friend.name %></strong>
+    </div>
   </div>
 <% end %>

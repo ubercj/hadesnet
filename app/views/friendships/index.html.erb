@@ -1,12 +1,19 @@
-<h1>Friend Requests</h1>
+<section class="section has-background-grey-dark has-text-white-ter">
+  <h1>Friend Requests</h1>
 
-<% @pending_requests.each do |request| %>
-  <%= image_tag user_profile_pic(request.sender) %>
-  <% if request.sender == current_user %>
-    <p>Your friend request to <%= request.receiver.name %> is pending.</p>
-  <% else %>
-    <p><%= request.sender.name %> would like to be your friend.</p>
-    <%= link_to "Accept", user_friendship_path(current_user, request), method: :patch %>
-    <%= link_to "Decline", user_friendship_path(current_user, request), method: :delete %>
+  <% @pending_requests.each do |request| %>
+    <% if request.sender == current_user %>
+      <div>
+        <%= image_tag user_profile_pic(request.receiver) %>
+        <p>Your friend request to <%= request.receiver.name %> is pending.</p>
+      </div>
+    <% else %>
+      <div>
+        <%= image_tag user_profile_pic(request.sender) %>
+        <p><%= request.sender.name %> would like to be your friend.</p>
+        <%= link_to "Accept", user_friendship_path(current_user, request), method: :patch %>
+        <%= link_to "Decline", user_friendship_path(current_user, request), method: :delete %>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+</section>

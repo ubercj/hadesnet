@@ -1,6 +1,12 @@
-<h1><%= @user.name %>'s Profile</h1>
+<section class="section has-background-grey-dark has-text-white-ter">
+  <h1 class="title has-text-danger-light"><%= @user.name %>'s Profile</h1>
 
-<p>A photo will go here eventually.</p>
-<%= image_tag user_profile_pic(@user, 400) %>
-
-<%= render "friendships/friends", user: @user %>
+  <div class="block">
+    <%= image_tag user_profile_pic(@user, 400), class: "is-rounded" %>
+  </div>
+  <div class="block">
+  <%= link_to "Account Settings", edit_user_registration_path, class: "button is-medium is-danger" %>
+  </div>
+  
+  <%= render "friendships/friends", user: @user %>
+</section>

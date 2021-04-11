@@ -1,1 +1,7 @@
 <%= @post.body %>
+
+<% if @post.photo.attached? %>
+  <div>
+    <%= image_tag @post.photo.variant(resize: "400x400") %>
+  </div>
+<% end %>

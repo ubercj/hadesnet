@@ -7,6 +7,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <style><%= yield :stylesheets %></style>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -14,22 +15,46 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
-    <nav>
-      <%= link_to "HadesNet", root_path, class: "button is-large is-link" %>
-      <%= link_to "New Post", new_post_path, class: "button is-medium is-link" %>
-      <% if user_signed_in? %>
-        <%= link_to "Account Settings", edit_user_registration_path, class: "button is-medium is-link" %>
-        <%= link_to current_user.name, user_path(current_user), class: "button is-medium is-link" %>
-        <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "button is-medium is-link" %>
-        <%= link_to "Find Friends", users_path, class: "button is-medium is-info" %>
-        <% if current_user.received_requests.pending.any? %>
-          <%= link_to "Friend Requests", user_friendships_path(current_user), class: "button is-medium is-danger" %>
-        <% else %>
-          <%= link_to "Friend Requests", user_friendships_path(current_user), class: "button is-medium is-link" %>
+    <nav id="main-nav" class="navbar has-background-grey-darker">
+      <div class="navbar-brand">
+        <%= link_to root_path, class: "navbar-item" do %>
+          <h1 class="title is-4 has-text-danger">HadesNet</h1>
         <% end %>
-      <% end %>
+      </div>
+
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <%= link_to "New Post", new_post_path, class: "navbar-item has-text-danger" %>
+          <% if user_signed_in? %>
+            <%= link_to current_user.name, user_path(current_user), class: "navbar-item has-text-danger" %>
+          <% end %>
+        </div>
+
+        <div class="navbar-end">
+          <% if user_signed_in? %>
+            <div class="navbar-item">
+              <%= link_to "Find Friends", users_path, class: "button is-medium is-danger is-outlined" %>
+            </div>
+            <% if current_user.received_requests.pending.any? %>
+              <div class="navbar-item">
+                <%= link_to "Friend Requests (#{current_user.received_requests.pending.count})", user_friendships_path(current_user), class: "button is-medium is-danger" %>
+              </div>
+            <% else %>
+              <div class="navbar-item">
+                <%= link_to "Friend Requests", user_friendships_path(current_user), class: "button is-medium is-danger is-outlined" %>
+              </div>
+            <% end %>
+            <div class="navbar-item">
+              <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "button is-medium is-danger is-outlined" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </nav>
     
-    <%= yield %>
+    <div id="content">
+      <%= content_for?(:content) ? yield(:content) : yield %>
+    </div>
+
   </body>
 </html>

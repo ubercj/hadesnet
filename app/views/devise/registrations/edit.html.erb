@@ -1,38 +1,84 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<section class="section has-background-grey-dark has-text-white-ter">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <div class="block">
+          <h2 class="title has-text-centered has-text-danger-light">Edit <%= resource_name.to_s.humanize %></h2>
+          <div class="block is-flex is-justify-content-center">
+            <%= image_tag user_profile_pic(@user, 300) %>
+          </div>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+          <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :name, required: true, autofocus: true %>
-    <%= f.input :email, required: true %>
-    <%= f.label :profile_pic, "Upload a profile photo" %>
-    <%= f.file_field :profile_pic %>
+            <div class="field">
+              <div class="control">
+                <%= f.input :name, required: true, autofocus: true, wrapper: false, input_html: { class: "input" } %>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <%= f.input :email, required: true, wrapper: false, input_html: { class: "input" } %>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <%= f.label :profile_pic, "Upload a new profile photo" %>
+                <%= f.file_field :profile_pic %>
+              </div>
+              <div class="control">
+                <%= f.hint "For best results, choose a photo with square dimensions" %>
+              </div>
+            </div>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+              <% end %>
 
-    <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "current-password" } %>
+              <div class="field">
+                <div class="control">
+                  <%= f.input :password,
+                              hint: "Leave it blank if you don't want to change it",
+                              required: false,
+                              input_html: { autocomplete: "new-password", class: "input" },
+                              wrapper: false %>
+                </div>
+              </div>
+              <div class="field">
+                <div class="control">
+                  <%= f.input :password_confirmation,
+                              required: false,
+                              input_html: { autocomplete: "new-password", class: "input" },
+                              wrapper: false %>
+                </div>
+              </div>
+              <div class="field">
+                <div class="control">
+                  <%= f.input :current_password,
+                              hint: "We need your current password to confirm your changes",
+                              required: true,
+                              input_html: { autocomplete: "current-password", class: "input" },
+                              wrapper: false %>
+                </div>
+              </div>
+
+            <div class="field">
+              <div class="control">
+              <%= f.button :submit, "Update", class: "button is-medium is-danger" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="block">
+          <h3 class="title is-6 has-text-white-ter">You really think you can escape?</h3>
+
+          <%= link_to "Cancel your account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "button is-medium is-warning is-outlined" %>
+        </div>
+        <div class="block">
+          <%= link_to "Back", :back %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</section>

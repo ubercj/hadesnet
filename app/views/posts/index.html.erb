@@ -1,35 +1,72 @@
-<% @posts.each do |post| %>
-  <% if current_user.friends.include?(post.user) || post.user == current_user %>
-    <div>
-      <%= post.user.name %>
-    </div>
-    <div>
-      <%= post.body %>
-      <p>Likes: <%= post.likes.count %></p>
-      <% if post.user == current_user %>
-        <%= link_to "Edit Post", edit_post_path(post) %>
-        <%= link_to "Delete Post", post_path(post), method: :delete, data: { confirm: "Are you sure you want to delete this post?" } %>
-      <% end %>
-    </div>
-      <%= link_to "Comment", new_post_comment_path(post) %>
-      <% if post.likes.any? { |like| like.user_id == current_user.id } %>
-        <%= link_to "Unlike", post_like_path(post, post.likes.find_by_user_id(current_user.id)), method: :delete %>
-      <% else %>
-        <%= link_to "Like", post_likes_path(post), method: :create %>
-      <% end %>
-    <div>
-      <% post.comments.each do |comment| %>
-        <div>
-          <p><%= comment.user.name %> says:</p>
-        </div>
-        <div>
-          <%= comment.body %>
-        </div>
-        <% if comment.user == current_user %>
-          <%= link_to "Edit", edit_post_comment_path(post, comment) %>
-          <%= link_to "Delete", post_comment_path(post, comment), method: :delete, data: { confirm: "Are you sure you want to delete this comment?" } %>
+<section class="section has-background-grey-dark has-text-white-ter">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <% @posts.each do |post| %>
+          <% if current_user.friends.include?(post.user) || post.user == current_user %>
+            <article class="media">
+              <figure class="media-left">
+                <p class="image is-64x64">
+                  <%= image_tag user_profile_pic(post.user), class: "is-rounded" %>
+                </p>
+              </figure>
+
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong class="has-text-white-ter"><%= post.user.name %></strong> -
+                    <%= post.pretty_time %>
+                    <br>
+                    <%= post.body %>
+                  </p>
+                  <% if post.photo.attached? %>
+                    <div class="content">
+                      <%= image_tag post.photo.variant(resize: "400x400") %>
+                    </div>
+                  <% end %>
+                  <p>
+                    Likes: <%= post.likes.count %>
+                    <% if post.likes.any? { |like| like.user_id == current_user.id } %>
+                      <%= link_to "Unlike", post_like_path(post, post.likes.find_by_user_id(current_user.id)), method: :delete %> |
+                    <% else %>
+                      <%= link_to "Like", post_likes_path(post), method: :create %> |
+                    <% end %>
+                    <%= link_to "Comment", new_post_comment_path(post) %>
+                    <% if post.user == current_user %>
+                      <br>
+                      <%= link_to "Edit Post", edit_post_path(post) %> |
+                      <%= link_to "Delete Post", post_path(post), method: :delete, data: { confirm: "Are you sure you want to delete this post?" } %>
+                    <% end %>
+                  </p>
+                </div>
+
+              <% post.comments.each do |comment| %>
+                <article class="media">
+                  <figure class="media-left">
+                    <p class="image is-64x64">
+                      <%= image_tag user_profile_pic(comment.user), class: "is-rounded" %>
+                    </p>
+                  </figure>
+                  <div class="media-content">
+                    <div class="content">
+                      <p>
+                        <strong class="has-text-white-ter"><%= comment.user.name %></strong>
+                        <br>
+                        <%= comment.body %>
+                        <% if comment.user == current_user %>
+                          <br>
+                          <%= link_to "Edit", edit_post_comment_path(post, comment) %> |
+                          <%= link_to "Delete", post_comment_path(post, comment), method: :delete, data: { confirm: "Are you sure you want to delete this comment?" } %>
+                        <% end %>
+                      </p>
+                    </div>
+                  <div>
+                </article>
+              <% end %>
+            </article>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
-  <% end %>
-<% end %>
+  </div>
+</section>

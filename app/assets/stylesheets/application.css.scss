@@ -14,8 +14,9 @@
  *= require_self
  */
 
+ 
  @import "bulma";
 
- .button {
-   color: white;
+ :root {
+   background-color: hsl(0, 0%, 29%);
  }

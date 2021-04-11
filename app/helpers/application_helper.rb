@@ -1,6 +1,6 @@
 module ApplicationHelper
 
-  def user_profile_pic(user, size = 80)
+  def user_profile_pic(user, size = 128)
     if user.profile_pic.attached?
       user.profile_pic.variant(resize: "#{size}x#{size}")
     else
