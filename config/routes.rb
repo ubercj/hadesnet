@@ -7,8 +7,13 @@ Rails.application.routes.draw do
     resources :friendships, only: %i[ index create update destroy ]
   end
 
-  resources :posts do
-    resources :comments, except: "index"
+  post '/posts/:post_id/comments/:comment_id/likes', to: 'likes#comment_like_create'
+
+  concern :likeable do
     resources :likes, only: %i[ create destroy ]
+  end
+
+  resources :posts, concerns: :likeable do
+    resources :comments, except: "index", concerns: :likeable
   end
 end

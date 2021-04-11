@@ -53,6 +53,15 @@
                         <strong class="has-text-white-ter"><%= comment.user.name %></strong>
                         <br>
                         <%= comment.body %>
+                      </p>
+                      <p>
+                        Likes: <%= comment.likes.count %>
+                        <% if comment.likes.any? { |like| like.user_id == current_user.id } %>
+                          <%= link_to "Unlike", post_comment_like_path(post, comment, comment.likes.find_by_user_id(current_user.id)), method: :delete %> |
+                        <% else %>
+                          <%= link_to "Like", post_comment_likes_path(post, comment), method: :create %> |
+                        <% end %>
+                        <%= link_to "Comment", new_post_comment_path(post) %>
                         <% if comment.user == current_user %>
                           <br>
                           <%= link_to "Edit", edit_post_comment_path(post, comment) %> |
