@@ -2,13 +2,15 @@ class FriendshipsController < ApplicationController
   before_action :set_friendship, only: %i[ update destroy ]
 
   def index
-    @pending_requests = Friendship.with_user(current_user).pending.includes(:sender)
+    # @pending_requests = Friendship.with_user(current_user).pending.includes(:sender)
+    @sent_requests = Friendship.sent_by_user(current_user).pending.includes(:receiver)
+    @received_requests = Friendship.received_by_user(current_user).pending.includes(:sender)
   end
 
   def create
     current_user.sent_requests.create!(receiver_id: friendship_params[:friend_id])
     flash[:notice] = "Your friend request has been sent."
-    redirect_to user_friendships_path(current_user)
+    redirect_to users_path
   end
 
   def update

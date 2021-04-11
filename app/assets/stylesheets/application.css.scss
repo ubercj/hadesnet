@@ -20,3 +20,16 @@
  :root {
    background-color: hsl(0, 0%, 29%);
  }
+
+ .round-image {
+	 border-radius: 50%;
+}
+
+a {
+  color: hsl(348, 100%, 61%);
+}
+
+a:hover {
+  background-color: black;
+  color:hsl(348, 100%, 61%);
+}

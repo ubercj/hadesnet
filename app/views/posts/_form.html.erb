@@ -9,12 +9,9 @@
         </div>
 
         <div class="field">
-          <label class="label has-text-white-ter">Add a photo</label>
+          <label class="label has-text-white-ter">Add a photo (optional)</label>
           <div class="control">
             <%= f.file_field :photo %>
-          </div>
-          <div class="control">
-            <%= f.hint "For best results, choose a photo with square dimensions." %>
           </div>
         </div>
 
@@ -24,6 +21,9 @@
           </div>
         </div>
       <% end %>
+
+      <%= link_to "Back", :back %>
+
     </div>
   </div>
 </div>

@@ -1,19 +1,44 @@
 <section class="section has-background-grey-dark has-text-white-ter">
-  <h1>Friend Requests</h1>
+  <div class="container">
+    <div class="columns">
+      <div class="column is-half">
+        <h1 class="title has-text-white-ter has-text-centered">Sent Requests</h1>
+        <% @sent_requests.each do |request| %>
+          <div class="block">
+            <div class="card has-background-grey-light">
+              <div class="card-content">
+                <p class="image is-64x64">
+                  <%= image_tag user_profile_pic(request.receiver), class: "is-rounded" %>
+                </p>
+                <br />
+                <p>Your friend request to <strong><%= request.receiver.name %></strong> is pending.</p>
+                <br />
+                <%= link_to "Cancel request", user_friendship_path(current_user, request), method: :delete, class: "button is-small is-danger" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
 
-  <% @pending_requests.each do |request| %>
-    <% if request.sender == current_user %>
-      <div>
-        <%= image_tag user_profile_pic(request.receiver) %>
-        <p>Your friend request to <%= request.receiver.name %> is pending.</p>
+      <div class="column is-half">
+        <h1 class="title has-text-white-ter has-text-centered">Received Requests</h1>
+        <% @received_requests.each do |request| %>
+          <div class="block">
+            <div class="card has-background-grey-light">
+              <div class="card-content">
+                <p class="image is-64x64">
+                  <%= image_tag user_profile_pic(request.sender), class: "is-rounded" %>
+                </p>
+                <br />
+                <p><strong><%= request.sender.name %></strong> would like to be your friend.</p>
+                <br />
+                <%= link_to "Accept", user_friendship_path(current_user, request), method: :patch, class: "button is-small is-danger" %>
+                <%= link_to "Decline", user_friendship_path(current_user, request), method: :delete, class: "button is-small is-danger" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
-    <% else %>
-      <div>
-        <%= image_tag user_profile_pic(request.sender) %>
-        <p><%= request.sender.name %> would like to be your friend.</p>
-        <%= link_to "Accept", user_friendship_path(current_user, request), method: :patch %>
-        <%= link_to "Decline", user_friendship_path(current_user, request), method: :delete %>
-      </div>
-    <% end %>
-  <% end %>
+    </div>
+  </div>
 </section>

@@ -1,0 +1,57 @@
+<% posts.each do |post| %>
+  <article class="media">
+    <figure class="media-left">
+      <p class="image is-64x64">
+        <%= image_tag user_profile_pic(post.user), class: "is-rounded" %>
+      </p>
+    </figure>
+
+    <div class="media-content">
+      <div class="content">
+        <p>
+          <strong class="has-text-white-ter is-size-6"><%= post.user.name %></strong> -
+          <%= pretty_time(post) %>
+          <br>
+          <%= post.body %>
+        </p>
+        <% if post.photo.attached? %>
+          <div class="content">
+            <%= image_tag post.photo.variant(resize: "400x400") %>
+          </div>
+        <% end %>
+        <p>
+          Likes: <%= post.likes.count %>
+        </p>
+      </div>
+
+      <% post.comments.each do |comment| %>
+        <article class="media">
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong class="has-text-white-ter"><%= comment.user.name %></strong> -
+                <%= pretty_time(comment) %>
+                <br>
+                <%= comment.body %>
+              </p>
+              <p>
+                Likes: <%= comment.likes.count %>
+                <% if comment.likes.any? { |like| like.user_id == current_user.id } %>
+                  <%= link_to "Unlike", post_comment_like_path(post, comment, comment.likes.find_by_user_id(current_user.id)), method: :delete %> |
+                <% else %>
+                  <%= link_to "Like", post_comment_likes_path(post, comment), method: :create %> |
+                <% end %>
+                <%= link_to "Comment", new_post_comment_path(post) %>
+                <% if comment.user == current_user %>
+                  <br>
+                  <%= link_to "Edit", edit_post_comment_path(post, comment) %> |
+                  <%= link_to "Delete", post_comment_path(post, comment), method: :delete, data: { confirm: "Are you sure you want to delete this comment?" } %>
+                <% end %>
+              </p>
+            </div>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  </article>
+<% end %>

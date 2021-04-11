@@ -1,12 +1,23 @@
 <section class="section has-background-grey-dark has-text-white-ter">
-  <h1 class="title has-text-danger-light"><%= @user.name %>'s Profile</h1>
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <h1 class="title has-text-white-ter has-text-centered"><%= @user.name %>'s Profile</h1>
 
-  <div class="block">
-    <%= image_tag user_profile_pic(@user, 400), class: "is-rounded" %>
+        <div class="block is-flex is-justify-content-center">
+          <%= image_tag user_profile_pic(@user, 400), class: "round-image" %>
+        </div>
+        <div class="block is-flex is-justify-content-center">
+          <%= link_to "Account Settings", edit_user_registration_path, class: "button is-medium is-danger" %>
+        </div>
+      </div>
+
+      <div class="column is-2"></div>
+
+      <div class="column is-half">
+        <h3 class="title has-text-white-ter has-text-centered"><%= @user.name %>'s Posts</h3>
+        <%= render "user_posts", posts: @user.posts.includes(:comments).order(created_at: :desc) %>
+      </div>
+    </div>
   </div>
-  <div class="block">
-  <%= link_to "Account Settings", edit_user_registration_path, class: "button is-medium is-danger" %>
-  </div>
-  
-  <%= render "friendships/friends", user: @user %>
 </section>

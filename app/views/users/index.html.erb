@@ -1,13 +1,28 @@
 <section class="section has-background-grey-dark has-text-white-ter">
-  <h1>Find Friends</h1>
-
-  <% @users.each do |suggestion| %>
-    <div>
-      <% unless has_request?(current_user, suggestion) || suggestion == current_user %>
-        <%= image_tag user_profile_pic(suggestion) %>
-        <p><%= suggestion.name %></p>
-        <%= link_to "Send Friend Request", user_friendships_path(current_user, :friendship => { friend_id: suggestion.id }), method: :create %>
+  <div class="container">
+    <h1 class="title has-text-white-ter has-text-centered">Find Friends</h1>
+    <div class="columns is-multiline">
+      <% @users.each do |suggestion| %>
+        <% unless has_request?(current_user, suggestion) || suggestion == current_user %>
+          <div class="column is-3">
+            <div class="block">
+              <div class="card has-background-grey-light is-flex is-justify-content-center">
+                <div class="card-content">
+                  <div class="is-flex is-justify-content-center">
+                    <p class="image is-64x64">
+                      <%= image_tag user_profile_pic(suggestion), class: "is-rounded" %>
+                    </p>
+                  </div>
+                  <br />
+                  <p class="has-text-weight-bold has-text-centered"><%= suggestion.name %></p>
+                  <br />
+                  <%= link_to "Send Friend Request", user_friendships_path(current_user, :friendship => { friend_id: suggestion.id }), method: :create, class: "button is-small is-danger" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
       <% end %>
     </div>
-  <% end %>
+  </div>
 </section>

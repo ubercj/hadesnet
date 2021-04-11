@@ -3,9 +3,9 @@
     <div class="columns is-centered">
       <div class="column is-half">
         <div class="block">
-          <h2 class="title has-text-centered has-text-danger-light">Edit <%= resource_name.to_s.humanize %></h2>
+          <h2 class="title has-text-centered has-text-white-ter">Edit <%= resource_name.to_s.humanize %></h2>
           <div class="block is-flex is-justify-content-center">
-            <%= image_tag user_profile_pic(@user, 300) %>
+            <%= image_tag user_profile_pic(@user, 300), class: "round-image" %>
           </div>
 
           <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>

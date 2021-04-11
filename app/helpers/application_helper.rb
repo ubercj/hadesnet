@@ -7,6 +7,10 @@ module ApplicationHelper
       gravatar_image_url(user.email, size: size, alt: user.name)
     end
   end
+
+  def pretty_time(model)
+    model.created_at.strftime("%b %-d at %l:%M %P")
+  end
   
   def find_request(user1, user2)
     if user1.sent_requests.any? { |request| request.receiver_id == user2.id }

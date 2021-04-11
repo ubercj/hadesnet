@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
 
   def index
-    @posts = Post.includes(:user, :comments)
+    @posts = Post.includes(:user, :comments).order(created_at: :desc)
   end
 
   def new
@@ -32,7 +32,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to post_path(@post), notice: "Your post was updated."}
+        format.html { redirect_to root_path, notice: "Your post was updated."}
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }

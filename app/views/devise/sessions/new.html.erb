@@ -10,9 +10,9 @@
     </div>
   
     <div class="column">
-      <div class="box has-background-danger has-text-grey-darker">
+      <div class="box has-background-danger has-text-black">
         <div class="block">
-          <h2 class="title has-text-centered has-text-grey-darker">Log In</h2>
+          <h2 class="title has-text-centered has-text-black">Log In</h2>
 
           <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
             <div class="field">
@@ -45,7 +45,7 @@
             </div>
           <% end %>
         </div>
-        <%= render "devise/shared/links" %>
+        <%= render "devise/shared/login_links" %>
 
       </div>
     </div>

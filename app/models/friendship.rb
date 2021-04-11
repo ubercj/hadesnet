@@ -5,5 +5,7 @@ class Friendship < ApplicationRecord
   scope :is_accepted, -> { where(accepted: true) }
   scope :pending, -> { where(accepted: false) }
 
-  scope :with_user, -> (user) { where(sender_id: user.id).or(where(receiver_id: user.id)) }
+  scope :sent_by_user, -> (user) { where(sender_id: user.id) }
+  scope :received_by_user, -> (user) { where(receiver_id: user.id) }
+  scope :with_user, -> (user) { sent_by_user(user).or(received_by_user(user)) }
 end
