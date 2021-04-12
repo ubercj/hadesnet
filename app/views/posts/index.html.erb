@@ -3,12 +3,11 @@
     <p class="title has-text-grey-darker has-text-centered">
       Welcome to the House of Hades
     </p>
-    <p class="subtitle has-text-grey-darker has-text-centered">
-      News from the underworld
-    </p>
   </div>
 </section>
   
+<%= render "form" %>
+
 <section class="section has-background-grey-dark has-text-white-ter">
   <div class="container">
     <div class="columns is-centered">
@@ -25,9 +24,10 @@
               <div class="media-content">
                 <div class="content">
                   <p>
-                    <strong class="has-text-white-ter is-size-6"><%= post.user.name %></strong> -
+                    <strong class="has-text-white-ter is-size-5"><%= post.user.name %></strong> -
                     <%= pretty_time(post) %>
-                    <br>
+                  </p>
+                  <p class="is-size-6">
                     <%= post.body %>
                   </p>
                   <% if post.photo.attached? %>
@@ -59,9 +59,10 @@
                         <div class="block">
                           <div class="content">
                             <p>
-                              <strong class="has-text-white-ter"><%= comment.user.name %></strong> -
+                              <strong class="has-text-white-ter is-size-6"><%= comment.user.name %></strong> -
                               <%= pretty_time(comment) %>
-                              <br>
+                            </p>
+                            <p>
                               <%= comment.body %>
                             </p>
                             <p>

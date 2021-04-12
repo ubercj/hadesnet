@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.includes(:user, :comments).order(created_at: :desc)
+    @post = current_user.posts.new
   end
 
   def new
