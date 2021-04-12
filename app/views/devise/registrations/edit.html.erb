@@ -73,7 +73,7 @@
         <div class="block">
           <h3 class="title is-6 has-text-white-ter">You really think you can escape?</h3>
 
-          <%= link_to "Cancel your account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "button is-medium is-warning is-outlined" %>
+          <%= link_to "Cancel your account", registration_path(resource_name), data: { confirm: "This will delete all of your posts and comments. Are you sure? This action cannot be undone." }, method: :delete, class: "button is-medium is-warning is-outlined" %>
         </div>
         <div class="block">
           <%= link_to "Back", :back %>

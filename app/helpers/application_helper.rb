@@ -4,7 +4,7 @@ module ApplicationHelper
     if user.profile_pic.attached?
       user.profile_pic.variant(resize: "#{size}x#{size}")
     else
-      gravatar_image_url(user.email, size: size, alt: user.name)
+      'shades.png'
     end
   end
 

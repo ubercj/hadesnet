@@ -1,6 +1,14 @@
 class User < ApplicationRecord
   require 'open-uri'
 
+  after_create do |user|
+    unless user.id <= 9
+      seed_friends
+      send_welcome_email
+    # Proc.new { |user| user.id <= 9 }
+    end
+  end
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -10,14 +18,14 @@ class User < ApplicationRecord
 
   validates :name, presence: true
 
-  has_many :received_requests, class_name: "Friendship", foreign_key: :receiver_id
-  has_many :sent_requests, class_name: "Friendship", foreign_key: :sender_id
+  has_many :received_requests, class_name: "Friendship", foreign_key: :receiver_id, dependent: :destroy
+  has_many :sent_requests, class_name: "Friendship", foreign_key: :sender_id, dependent: :destroy
 
   # has_many :friends, through: :received_requests, source: :sender
   # has_many :friends, through: :sent_requests, source: :receiver
 
-  has_many :posts
-  has_many :comments
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :likes
 
   has_one_attached :profile_pic
@@ -29,7 +37,6 @@ class User < ApplicationRecord
       user.name = auth.info.name   # assuming the user model has a name
 
       if auth.info.image
-        puts auth.info.image
         downloaded_image = URI.open(auth.info.image)
         user.profile_pic.attach(io: downloaded_image, 
                               filename: "image-#{Time.now.strftime("%s%L")}", 
@@ -52,8 +59,20 @@ class User < ApplicationRecord
 
   private
 
-  def welcome_email
-    UserMailer.with()
+  def send_welcome_email
+    UserMailer.with(name: self.name, email: self.email).welcome_email.deliver
+  end
+
+  def seed_friends
+    self.received_requests.create(sender_id: 1, accepted: true)
+    self.received_requests.create(sender_id: 2, accepted: true)
+    self.received_requests.create(sender_id: 3, accepted: true)
+    self.received_requests.create(sender_id: 4, accepted: true)
+    self.received_requests.create(sender_id: 5, accepted: true)
+    self.received_requests.create(sender_id: 6)
+    self.received_requests.create(sender_id: 7)
+    self.received_requests.create(sender_id: 8)
+    self.received_requests.create(sender_id: 9)
   end
 
   def sent_accepteds

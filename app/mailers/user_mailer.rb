@@ -1,9 +1,10 @@
 class UserMailer < ApplicationMailer
-  default from: 'confirmation@hades.net'
+  default from: 'hermes@hades.net'
 
   def welcome_email
-    @user = params[:user]
+    @email = params[:email]
+    @name = params[:name]
     @url = 'http://hades.net'
-    mail(to: @user.email, subject: 'Welcome to HELL')
+    mail(to: @email, subject: 'Welcome to HELL')
   end
 end
