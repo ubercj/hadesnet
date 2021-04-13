@@ -24,7 +24,7 @@
             <div class="field">
               <div class="control">
                 <%= f.label :profile_pic, "Upload a new profile photo" %>
-                <%= f.file_field :profile_pic %>
+                <%= f.file_field :profile_pic, direct_upload: true %>
               </div>
               <div class="control">
                 <%= f.hint "For best results, choose a photo with square dimensions" %>

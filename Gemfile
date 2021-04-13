@@ -44,6 +44,9 @@ gem 'omniauth-rails_csrf_protection', '~> 1.0'
 # Figaro
 gem 'figaro', '~> 1.2'
 
+# Cloudinary for image hosting
+gem 'cloudinary'
+
 # Gravatar
 gem 'gravatar_image_tag', '~> 1.2'
 gem 'image_processing', '~> 1.12', '>= 1.12.1'
