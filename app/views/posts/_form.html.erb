@@ -5,7 +5,13 @@
       <%= simple_form_for @post do |f| %>
         <div class="field">
           <div class="control">
-            <%= f.input :body, label: false, wrapper: false, input_html: { class: "textarea" }, label_html: { class: "label" }, autofocus: true %>
+            <%= f.input :body,
+                        label: false,
+                        wrapper: false,
+                        error: "Post can't be blank.",
+                        input_html: { class: "textarea" },
+                        label_html: { class: "label" },
+                        autofocus: true %>
           </div>
         </div>
 
