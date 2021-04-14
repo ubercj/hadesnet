@@ -131,6 +131,7 @@ Rails.application.configure do
     port: 587,
     domain: 'yahoo.com',
     enable_starttls_auto: true,
+    authentication:       'plain',
     user_name: ENV['YAHOO_USERNAME'],
     password: ENV['YAHOO_PASSWORD']
   }
