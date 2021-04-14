@@ -127,13 +127,12 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
-  address:              'smtp.gmail.com',
-  port:                 587,
-  domain:               'gmail.com',
-  user_name:            ENV['gmail_app_username'],
-  password:             ENV['gmail_app_password'],
-  authentication:       'plain',
-  enable_starttls_auto: true
+    address: 'smtp.mail.yahoo.com',
+    port: 587,
+    domain: 'yahoo.com',
+    enable_starttls_auto: true,
+    user_name: ENV['YAHOO_USERNAME'],
+    password: ENV['YAHOO_PASSWORD']
   }
 
 end

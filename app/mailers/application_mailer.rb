@@ -1,7 +1,7 @@
 class ApplicationMailer < ActionMailer::Base
   # require 'sendgrid-ruby'
   # include SendGrid
-  default from: 'Hermes <ubercj@gmail.com>'
+  default from: 'Hermes <hermes437637@yahoo.com>'
   layout 'mailer'
 
   # def hello_world_email
