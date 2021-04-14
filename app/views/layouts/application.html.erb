@@ -25,6 +25,7 @@
       <% if user_signed_in? %>
         <div class="navbar-menu">
           <div class="navbar-start">
+            <%= link_to "About", about_path, class: "navbar-item has-text-danger" %>
             <%= link_to "New Post", new_post_path, class: "navbar-item has-text-danger" %>
             <%= link_to current_user.name, user_path(current_user), class: "navbar-item has-text-danger" %>
           </div>
@@ -48,6 +49,12 @@
     <div id="content">
       <%= content_for?(:content) ? yield(:content) : yield %>
     </div>
+
+    <footer class="footer has-background-grey-dark pb-2">
+      <div class="content">
+        <%= link_to "Privacy Policy", privacy_policy_path, class: "is-size-7" %>
+      </div>
+    </footer>
 
   </body>
 </html>

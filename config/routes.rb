@@ -16,4 +16,7 @@ Rails.application.routes.draw do
   resources :posts, concerns: :likeable do
     resources :comments, except: "index", concerns: :likeable
   end
+
+  get '/about', to: 'static_pages#about'
+  get '/privacy_policy', to: 'static_pages#privacy_policy'
 end

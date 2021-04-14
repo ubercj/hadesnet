@@ -5,7 +5,6 @@ class User < ApplicationRecord
     unless user.id <= 9
       seed_friends
       send_welcome_email
-    # Proc.new { |user| user.id <= 9 }
     end
   end
 
