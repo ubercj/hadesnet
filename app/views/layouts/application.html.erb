@@ -49,12 +49,5 @@
     <div id="content">
       <%= content_for?(:content) ? yield(:content) : yield %>
     </div>
-
-    <footer class="footer has-background-grey-dark pb-2">
-      <div class="content">
-        <%= link_to "Privacy Policy", privacy_policy_path, class: "is-size-7" %>
-      </div>
-    </footer>
-
   </body>
 </html>
