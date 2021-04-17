@@ -4,3 +4,14 @@ post1:
   body: Post Malone
   user: zagreus
 
+post2:
+  body: The Postman cometh
+  user: zagreus
+
+post3:
+  body: I belong to no one
+  user: nobody
+
+post4:
+  body: Shut up
+  user: meg

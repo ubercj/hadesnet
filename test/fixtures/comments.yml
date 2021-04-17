@@ -6,4 +6,21 @@ comment1:
   post: post1
 
 comment2:
-  body: MyText
+  body: Hello
+  user: nobody
+  post: post2
+
+comment3:
+  body: Who are you?
+  user: zagreus
+  post: post2
+
+comment4:
+  body: Hmph
+  user: meg
+  post: post1
+
+comment5:
+  body: No really
+  user: meg
+  post: post4

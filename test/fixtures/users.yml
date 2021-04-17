@@ -8,5 +8,11 @@ zagreus:
   name: "Zagreus"
   email: "zag@zag.com"
 
-two: {}
+meg:
+  name: "Meg"
+  email: "meg@meg.com"
+
+nobody:
+  name: "Nobody"
+  email: "nobody@email.com"
 

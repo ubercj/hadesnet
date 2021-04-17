@@ -15,6 +15,20 @@ class FeedFlowTest < ActionDispatch::IntegrationTest
     assert_select "p", "Welcome to the House of Hades"
   end
 
+  test "can only see posts by themselves and by friends" do
+    meg = users(:meg)
+    sign_in meg
+
+    get "/"
+
+    assert_select "p", "Post Malone"
+    assert_select "p", "Shut up"
+    assert_select "p", { count: 0, text: "I belong to no one" }
+
+    # Can see comments on posts by friends, even if commenter is not a friend
+    assert_select "p", "Hello"
+  end
+
   test "can make a post" do
     get new_post_path
     assert_response :success
@@ -46,6 +60,35 @@ class FeedFlowTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to root_path
+  end
+
+  test "can like a post" do
+    post post_likes_path(@post)
+    assert_redirected_to root_path
+  end
+
+  test "can unlike a post" do
+    liked_post = posts(:post4)
+    like = likes(:one)
+
+    assert_difference("Like.count", -1) do
+      delete post_like_path(liked_post, like)
+    end
+  end
+
+  test "can like a comment" do
+    post post_comment_likes_path(@post, @comment)
+    assert_redirected_to root_path
+  end
+
+  test "can unlike a comment" do
+    liked_comment = comments(:comment3)
+    liked_post = liked_comment.post
+    like = likes(:two)
+
+    assert_difference("Like.count", -1) do
+      delete post_comment_like_path(liked_post, liked_comment, like)
+    end
   end
 
   test "can create a comment" do
