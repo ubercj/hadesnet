@@ -1,4 +1,6 @@
-# HadesNet README
+# HadesNet
+
+See it live at [https://hades-net.herokuapp.com/](https://hades-net.herokuapp.com/).
 
 This is the final project in the Rails module of The Odin Project. More info about this project [here](https://www.theodinproject.com/paths/full-stack-ruby-on-rails/courses/ruby-on-rails/lessons/final-project)
 
