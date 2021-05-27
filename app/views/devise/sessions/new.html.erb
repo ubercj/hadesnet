@@ -39,7 +39,7 @@
             </div>
 
             <div class="field">
-              <div class="control">
+              <div class="control buttons">
                 <%= f.button :submit, "Log in", class: "button is-medium is-black" %>
               </div>
             </div>
@@ -48,6 +48,17 @@
         <%= render "devise/shared/login_links" %>
 
       </div>
+
+      <div class="has-text-white-ter buttons">
+        Or skip the login and
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= f.hidden_field :email, value: "justvisiting@hades.net" %>
+          <%= f.hidden_field :password, value: "betweenlife&death" %>
+          <%= f.hidden_field :remember_me, value: false %>
+          <%= f.button :submit, "Take a look around", class: "button is-medium is-warning ml-2" %>
+        <% end %>
+      </div>
+
     </div>
   </div>
 </section>

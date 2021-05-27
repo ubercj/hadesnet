@@ -16,6 +16,7 @@ charon = User.create!(name: 'Charon', email: 'charon@hades.net', password: 'rive
 zeus = User.create!(name: 'Zeus', email: 'zeus@elysium.net', password: 'lightningstrikes', password_confirmation: 'lightningstrikes')
 aphrodite = User.create!(name: 'Aphrodite', email: 'aphrodite@elysium.net', password: 'eyesonme', password_confirmation: 'eyesonme')
 dionysus = User.create!(name: 'Dionysus', email: 'dionysus@elysium.net', password: 'time2party', password_confirmation: 'time2party')
+vip_shade = User.create!(name: 'VIP Shade', email: 'justvisiting@hades.net', password: 'betweenlife&death', password_confirmation: 'betweenlife&death')
 
 # Add profile pics
 hermes.profile_pic.attach(io: File.open('app/assets/images/seed_profiles/hermes.jpg'), filename: 'hermes.jpg', content_type: ['image/jpg', 'image/png'])
@@ -27,6 +28,7 @@ charon.profile_pic.attach(io: File.open('app/assets/images/seed_profiles/charon.
 zeus.profile_pic.attach(io: File.open('app/assets/images/seed_profiles/zeus.png'), filename: 'zeus.png', content_type: ['image/jpg', 'image/png'])
 aphrodite.profile_pic.attach(io: File.open('app/assets/images/seed_profiles/aphrodite.jpg'), filename: 'aphrodite.jpg', content_type: ['image/jpg', 'image/png'])
 dionysus.profile_pic.attach(io: File.open('app/assets/images/seed_profiles/dionysus.png'), filename: 'dionysus.png', content_type: ['image/jpg', 'image/png'])
+vip_shade.profile_pic.attach(io: File.open('app/assets/images/shades.png'), filename: 'dionysus.png', content_type: ['image/jpg', 'image/png'])
 
 # Create posts
 first_post = hermes.posts.create(body: 'Of course I made the first post. Are you surprised? Now I\'ve gotta run, buh bye!')

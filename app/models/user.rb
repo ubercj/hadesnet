@@ -2,7 +2,7 @@ class User < ApplicationRecord
   require 'open-uri'
 
   after_create do |user|
-    unless user.id <= 9
+    unless user.id <= 10
       seed_friends
       send_welcome_email
     end
