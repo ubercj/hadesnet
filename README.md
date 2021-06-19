@@ -12,7 +12,28 @@ That didn't make much sense to me, so I decided to just use 1 model and add a bo
 
 ### Using Bulma
 
-I haven't even gotten to the CSS part of the curriculum yet, but I decided to give Bulma a spin and it was very intuitive and satisfying. I highly recommend it to anyone, and their [documentation](https://bulma.io/documentation/) helped me do just about everything I wanted to do with the layout of the site. (Except for changing the default background color - come on!)
+I haven't even gotten to the CSS part of the curriculum yet, but I decided to give Bulma a spin and it was very intuitive and satisfying. I highly recommend it to anyone, and their [documentation](https://bulma.io/documentation/) helped me do just about everything I wanted to do with the layout of the site.
+
+#### Mobile Responsiveness, JavaScript, and Turbolinks
+
+After learning more about CSS frameworks and mobile responsiveness, I went back and tweaked some things to make the site function properly on mobile devices. In particular, I added a menu that can be toggled via a [hamburger menu](http://bulma.io/documentation/components/navbar/#navbar-burger) in the navbar. Bulma actually makes this fairly easy, and they even include some sample JavaScript to toggle the visibility of the menu.
+
+There was one thing I wasn't ready for, though - Rails uses Turbolinks by default. So the sample JS provided by Bulma would only set the event listener on the initial page load, but when I navigated to another page, the navigation menu would no longer work. After looking around, I found [this page](https://github.com/turbolinks/turbolinks/blob/master/README.md#observing-navigation-events) from the Turbolinks wiki that explains you need to change the event that adds the listener to the hamburger menu on page load.
+
+I.e. This bit
+
+```js
+document.addEventListener('turbolinks:load', () => {
+  /*...Adding 'click' listener to hamburger menu */
+}
+```
+needs to be changed to this:
+
+```js
+document.addEventListener('turbolinks:load', () => {
+  /*...Adding 'click' listener to hamburger menu */
+}
+```
 
 ### Facebook Omniauth
 
