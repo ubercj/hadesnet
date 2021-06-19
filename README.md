@@ -23,7 +23,7 @@ There was one thing I wasn't ready for, though - Rails uses Turbolinks by defaul
 I.e. This bit
 
 ```js
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('DOMContentLoaded', () => {
   /*...Adding 'click' listener to hamburger menu */
 }
 ```
