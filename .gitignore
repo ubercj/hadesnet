@@ -39,3 +39,6 @@ yarn-debug.log*
 /config/application.yml
 /config/cloudinary.yml
 sendgrid.env
+
+# Ignore files created by Vagrant
+.vagrant/
