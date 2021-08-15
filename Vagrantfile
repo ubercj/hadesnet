@@ -39,12 +39,18 @@
 #   4. SSH into the machine using 'vagrant ssh'.
 #
 #   5. Configure Postgres if required.
+#       i.    `sudo su - postgres`
+#       ii.   `createuser -s -r postgres`
+#       iii.  `rails db:create`
+#       iv.   `rails db:migrate`
 #
 #   6. If Rails app is not already created, create it with 'rails new /vagrant'.
 #
 #   7. In the shell, run 'cd /vagrant' to switch to the directory for the app.
 #
 #   8. Run 'bundle install'.
+#
+#   Note: If the Rails development server won't work, you may have to run `rails webpacker:install`
 # -----------------------------------------------------------------------------
 
 $as_root = <<AS_ROOT
