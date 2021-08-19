@@ -20,9 +20,6 @@ class User < ApplicationRecord
   has_many :received_requests, class_name: "Friendship", foreign_key: :receiver_id, dependent: :destroy
   has_many :sent_requests, class_name: "Friendship", foreign_key: :sender_id, dependent: :destroy
 
-  # has_many :friends, through: :received_requests, source: :sender
-  # has_many :friends, through: :sent_requests, source: :receiver
-
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes
@@ -30,29 +27,26 @@ class User < ApplicationRecord
   has_one_attached :profile_pic
 
   def self.from_omniauth(auth)
-    if User.find_by(email: auth.info.email)
-      user = User.find_by(email: auth.info.email)
+    if getExistingUser(auth)
+      user = getExistingUser(auth)
     else
-      user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)
+      user = User.new
     end
 
     user.email = auth.info.email
     user.password = Devise.friendly_token[0, 20]
-    user.name = auth.info.name   # assuming the user model has a name
-
+    user.name = auth.info.name
     if auth.info.image
       downloaded_image = URI.open(auth.info.image)
       user.profile_pic.attach(io: downloaded_image, 
                             filename: "image-#{Time.now.strftime("%s%L")}", 
                             content_type: downloaded_image.content_type)
     end
+    user.provider = auth.provider
+    user.uid = auth.uid
 
     user.save!
     user
-  end
-
-  def update_user_with_omniauth
-    # Set provider and uid, change password and image, too, I guess
   end
 
   def friends
@@ -64,6 +58,10 @@ class User < ApplicationRecord
   end
 
   private
+
+  def getExistingUser(auth)
+    User.find_by(provider: auth.provider, uid: auth.uid) || User.find_by(email: auth.info.email)
+  end
 
   def send_welcome_email
     UserMailer.with(name: self.name, email: self.email).welcome_email.deliver
