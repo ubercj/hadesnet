@@ -30,22 +30,29 @@ class User < ApplicationRecord
   has_one_attached :profile_pic
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0, 20]
-      user.name = auth.info.name   # assuming the user model has a name
-
-      if auth.info.image
-        downloaded_image = URI.open(auth.info.image)
-        user.profile_pic.attach(io: downloaded_image, 
-                              filename: "image-#{Time.now.strftime("%s%L")}", 
-                              content_type: downloaded_image.content_type)
-      end
-
-      # If you are using confirmable and the provider(s) you use validate emails, 
-      # uncomment the line below to skip the confirmation emails.
-      # user.skip_confirmation!
+    if User.find_by(email: auth.info.email)
+      user = User.find_by(email: auth.info.email)
+    else
+      user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)
     end
+
+    user.email = auth.info.email
+    user.password = Devise.friendly_token[0, 20]
+    user.name = auth.info.name   # assuming the user model has a name
+
+    if auth.info.image
+      downloaded_image = URI.open(auth.info.image)
+      user.profile_pic.attach(io: downloaded_image, 
+                            filename: "image-#{Time.now.strftime("%s%L")}", 
+                            content_type: downloaded_image.content_type)
+    end
+
+    user.save!
+    user
+  end
+
+  def update_user_with_omniauth
+    # Set provider and uid, change password and image, too, I guess
   end
 
   def friends
