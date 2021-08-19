@@ -27,8 +27,8 @@ class User < ApplicationRecord
   has_one_attached :profile_pic
 
   def self.from_omniauth(auth)
-    if getExistingUser(auth)
-      user = getExistingUser(auth)
+    if User.getExistingUser(auth)
+      user = User.getExistingUser(auth)
     else
       user = User.new
     end
@@ -59,7 +59,7 @@ class User < ApplicationRecord
 
   private
 
-  def getExistingUser(auth)
+  def self.getExistingUser(auth)
     User.find_by(provider: auth.provider, uid: auth.uid) || User.find_by(email: auth.info.email)
   end
 
