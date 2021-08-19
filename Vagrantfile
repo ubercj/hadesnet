@@ -14,6 +14,7 @@
 #   Git
 #   SQLite3
 #   PostgreSQL
+#   ImageMagick (for ActiveStorage images)
 #   NodeJS
 #   Yarn
 #   Rbenv
@@ -51,7 +52,8 @@
 #   8. Run 'bundle install'.
 #
 #   Note: If the Rails development server won't work, you may have to run `rails webpacker:install`
-# -----------------------------------------------------------------------------
+#   Note 2: To run the server from a VM, you may need to run the command like so: `rails s -b 0.0.0.0`
+# ----------------------------------------------------------------------------------------------------
 
 $as_root = <<AS_ROOT
 echo Running root script...
@@ -71,6 +73,9 @@ sudo apt-get -y install sqlite3
 
 echo Installing postgres...
 sudo apt-get -y install postgresql-client postgresql libpq-dev
+
+echo Installing imagemagick...
+sudo apt-get -y install imagemagick
 
 echo Installing nodejs...
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
